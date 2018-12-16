@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">ASmeet5</string>
+    <string name="cell1tv1">c1tv1</string>
+    <string name="cell1tv2">c1tv2</string>
+    <string name="cell1tv3">c1tv3</string>
+    <string name="cell2tv1">cell2tv1</string>
+    <string name="cell2tv2">cell2tv2</string>
+    <string name="cell2tv3">cell2tv3</string>
+    <string name="cell2tv4">cell2tv4</string>
+    <string name="cell2tv5">cell2tv5</string>
+    <string name="cell3tv1">cell3tv1</string>
+    <string name="cell3tv2">cell3tv2</string>
+    <string name="cell3tv3">cell3tv3</string>
+    <string name="cell4btn1">btn1</string>
+    <string name="cell4btn2">btn2</string>
+</resources>
