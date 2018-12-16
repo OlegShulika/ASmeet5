@@ -11,6 +11,6 @@
     <string name="cell3tv1">cell3tv1</string>
     <string name="cell3tv2">cell3tv2</string>
     <string name="cell3tv3">cell3tv3</string>
-    <string name="cell4btn1">btn1</string>
-    <string name="cell4btn2">btn2</string>
+    <string name="cell4btn1">000\u00B0</string>
+    <string name="cell4btn2">stop</string>
 </resources>
