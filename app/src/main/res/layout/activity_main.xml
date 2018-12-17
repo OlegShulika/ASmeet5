@@ -93,16 +93,19 @@
         android:layout_margin="@dimen/cell_margin"
         android:orientation="vertical">
         <TextView
+            android:id="@+id/cell3tv1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/cell_margin"
             android:text="@string/cell3tv1"/>
         <TextView
+            android:id="@+id/cell3tv2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/cell_margin"
             android:text="@string/cell3tv2"/>
         <TextView
+            android:id="@+id/cell3tv3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/cell_margin"
