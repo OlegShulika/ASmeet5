@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @interface MsgCommand {
-    int INVALID = -1;
     int REGISTER_CLIENT = 0;
     int UNREGISTER_CLIENT = 1;
     int SET_VALUE = 2;
