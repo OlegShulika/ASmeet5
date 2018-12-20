@@ -1,7 +1,9 @@
 package ru.olegshulika.asmeet5;
 
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Handler;
@@ -44,9 +46,27 @@ public class MainActivity extends AppCompatActivity {
     private int mC4direction=1;     // +1 (CW)  -1(CCW)
     private long mc4delta=0;
 
-    private LocalBroadcastManager mBroadcastManager = LocalBroadcastManager.getInstance(this);
-    private CustomBroadcastReceiver mBroadcastReceiver = new CustomBroadcastReceiver(new ViewCallbackImpl());
-    private IntentFilter mIntentFilter;
+    private LocalBroadcastManager localBroadcastManager;
+    private LocalBroadcastReceiver localBroadcstReceiver;
+    private class LocalBroadcastReceiver extends BroadcastReceiver {
+        LocalBroadcastReceiver(){super();}
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            Log.d(TAG,"onReceive "+action);
+            if(NetworkService.KEY_BROADCAST.equals(action)) {
+                String testUrl = intent.getStringExtra(NetworkService.KEY_URL);
+                Log.d(TAG,"testUrl "+testUrl);
+                long testLat = intent.getLongExtra(NetworkService.KEY_LATENCY, 0);
+                if (testUrl.equals(R.string.test1url)) {
+                    mC2Text1.setText(testUrl);
+                    mC2Text2.setText(testLat>0? "ok":"N/A");
+                    mC2Text3.setText(String.valueOf(testLat));
+                }
+            }
+        }
+    };
+
 
     private Messenger mTimeCell24Messenger = new Messenger(new IncomingTimeHandler());
     private Messenger mTimeServiceMessenger;
@@ -106,7 +126,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initViews();
         initListeners();
-        Log.d(TAG, " onCreate");
+        localBroadcastManager = LocalBroadcastManager.getInstance(this);
+        localBroadcstReceiver = new LocalBroadcastReceiver();
+        Log.d(TAG, " onCreate ");
+
     }
 
     void initViews(){
@@ -167,6 +190,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         Log.d(TAG, " onStart");
         super.onStart();
+        startService(NetworkService.newIntent(MainActivity.this, Command.START));
+        startService(NetworkService.newIntent(MainActivity.this, getString(R.string.test1url)));
+        startService(NetworkService.newIntent(MainActivity.this, getString(R.string.test2url)));
     }
 
     @Override
@@ -174,6 +200,13 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, " onResume");
         super.onResume();
         bindTimeService();
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(NetworkService.KEY_BROADCAST);
+        Log.d(TAG, "localBroadcastManager="+localBroadcastManager);
+        Log.d(TAG, "localBroadcstReceiver="+localBroadcstReceiver);
+        Log.d(TAG, "intentFilter="+intentFilter);
+        localBroadcastManager.registerReceiver(localBroadcstReceiver, intentFilter);
     }
 
     @Override
@@ -181,12 +214,15 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, " onPause");
         super.onPause();
         unbindTimeService();
+        localBroadcastManager.unregisterReceiver(localBroadcstReceiver);
+
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         Log.d(TAG, " onStop");
+        startService(NetworkService.newIntent(MainActivity.this, Command.STOP));
     }
 
     @Override

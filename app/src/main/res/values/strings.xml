@@ -13,4 +13,6 @@
     <string name="cell3tv3">cell3tv3</string>
     <string name="cell4btn1">000\u00B0</string>
     <string name="cell4btn2">stop</string>
+    <string name="test1url">http://www.google.com</string>
+    <string name="test2url">http://www.yandex.ru</string>
 </resources>
