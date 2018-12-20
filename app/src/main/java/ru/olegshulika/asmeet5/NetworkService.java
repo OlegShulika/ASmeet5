@@ -39,7 +39,7 @@ public class NetworkService extends Service {
     private static final String KEY_ADDURL = "add.url.cmd";
     private List<String> mUrlList = new ArrayList<String>();
     private static final int SERVICE_WORKCOUNT_LIMIT = 900;     // 900 sec (15 min)
-    private static final int SERVICE_SLEEP_TIME = 1000;         // wait 1 sec
+    private static final int SERVICE_SLEEP_TIME = 2000;         // wait 2 sec
 
     private boolean serviceStarted = false;
     private boolean isServiceStarted() {

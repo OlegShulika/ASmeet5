@@ -24,7 +24,7 @@ public class TimeService extends Service {
     private List<Messenger> mClients = new ArrayList<Messenger>();
     private Messenger mMessenger = new Messenger (new IncomingHandler());
     private static final int SERVICE_WORKTIME_LIMIT = 1000000;   // max work time in msec
-    private static final int SERVICE_WORKTIME_STEP = 100;   // work step in msec
+    private static final int SERVICE_WORKTIME_STEP = 300;   // work step in msec
 
     private class IncomingHandler extends Handler {
         @Override

@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
     private LocalBroadcastManager localBroadcastManager;
     private LocalBroadcastReceiver localBroadcstReceiver;
+
     private class LocalBroadcastReceiver extends BroadcastReceiver {
         LocalBroadcastReceiver(){super();}
         @Override
@@ -56,12 +57,16 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG,"onReceive "+action);
             if(NetworkService.KEY_BROADCAST.equals(action)) {
                 String testUrl = intent.getStringExtra(NetworkService.KEY_URL);
-                Log.d(TAG,"testUrl "+testUrl);
                 long testLat = intent.getLongExtra(NetworkService.KEY_LATENCY, 0);
-                if (testUrl.equals(R.string.test1url)) {
-                    mC2Text1.setText(testUrl);
-                    mC2Text2.setText(testLat>0? "ok":"N/A");
-                    mC2Text3.setText(String.valueOf(testLat));
+                if (testUrl.equals(getString(R.string.test1url))) {
+                    mC1Text1.setText(testUrl);
+                    mC1Text2.setText(testLat>0? "ok":"N/A");
+                    mC1Text3.setText(String.valueOf(testLat));
+                }
+                if (testUrl.equals(getString(R.string.test2url))) {
+                    mC3Text1.setText(testUrl);
+                    mC3Text2.setText(testLat>0? "ok":"N/A");
+                    mC3Text3.setText(String.valueOf(testLat));
                 }
             }
         }
